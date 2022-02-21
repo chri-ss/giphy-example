@@ -33,6 +33,8 @@
           .then(function (response) {
             console.log(response);
             image.src = response.data.images.original.url;
+          }).catch((error) => {
+            console.error('No gifs found');
           });
       }
       fetchImage(defaultSearch);
