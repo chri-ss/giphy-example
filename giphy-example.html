@@ -10,10 +10,9 @@
   </head>
   <body>
     <div class="container">
-      <img src="#" />
-      <button class="new">new</button>
-      <form>
-        <label for="search"></label>
+      <img src="#" id="image"/>
+      <form id="search">
+        <label for="search">Search</label>
         <input type="text" class="search" name="search" />
         <button type="submit" class="search-button">Search</button>
       </form>
@@ -37,9 +36,6 @@
           });
       }
       fetchImage(defaultSearch);
-      
-      const newButton = document.querySelector(".new");
-      newButton.addEventListener("click", fetchImage);
 
       const form = document.querySelector('form');
       const searchButton = document.querySelector('.search-button');
