@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="reset.css" />
     <title>Document</title>
   </head>
   <body>
     <div class="container">
-      <img src="#" id="image"/>
+      <img src="#" id="image" />
       <form id="search">
         <label for="search">Search</label>
         <input type="text" class="search" name="search" />
@@ -22,31 +22,24 @@
 
       const defaultSearch = "pingas";
 
-      function fetchImage(searchTerm) {
-        fetch(
+      async function fetchImage(searchTerm) {
+        const response = await fetch(
           `https://api.giphy.com/v1/gifs/translate?api_key=Uf7aWikuLLi9LuGRFmPmxstyxzD4S7bf&s=${searchTerm}`,
           { mode: "cors" }
-        )
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (response) {
-            console.log(response);
-            image.src = response.data.images.original.url;
-          }).catch((error) => {
-            console.error('No gifs found');
-          });
+        );
+        const imageData = await response.json();
+        console.log(imageData);
+        image.src = imageData.data.images.original.url;
       }
       fetchImage(defaultSearch);
 
-      const form = document.querySelector('form');
-      const searchButton = document.querySelector('.search-button');
-      const search = document.querySelector('.search');
+      const form = document.querySelector("form");
+      const search = document.querySelector(".search");
 
-      form.addEventListener('submit', (e)  => {
+      form.addEventListener("submit", (e) => {
         e.preventDefault();
         fetchImage(search.value);
-      })
+      });
     </script>
   </body>
 </html>
