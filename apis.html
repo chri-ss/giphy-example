@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reset.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <img src="#" />
+      <button class="new">new</button>
+      <form>
+        <label for="search"></label>
+        <input type="text" class="search" name="search" />
+        <button type="submit" class="search-button">Search</button>
+      </form>
+    </div>
+    <script>
+      const image = document.querySelector("img");
+
+      const defaultSearch = "pingas";
+
+      function fetchImage(searchTerm) {
+        fetch(
+          `https://api.giphy.com/v1/gifs/translate?api_key=Uf7aWikuLLi9LuGRFmPmxstyxzD4S7bf&s=${searchTerm}`,
+          { mode: "cors" }
+        )
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (response) {
+            console.log(response);
+            image.src = response.data.images.original.url;
+          });
+      }
+      fetchImage(defaultSearch);
+      
+      const newButton = document.querySelector(".new");
+      newButton.addEventListener("click", fetchImage);
+
+      const form = document.querySelector('form');
+      const searchButton = document.querySelector('.search-button');
+      const search = document.querySelector('.search');
+
+      form.addEventListener('submit', (e)  => {
+        e.preventDefault();
+        fetchImage(search.value);
+      })
+    </script>
+  </body>
+</html>
